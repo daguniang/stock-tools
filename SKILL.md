@@ -205,14 +205,25 @@ stocks-data/stocklist.txt
 - 批量查询当前自选股行情
 - 输出 JSON，便于后续整理成自然语言回复
 
-调用示例：
+调用示例（默认短文本输出，避免输出过长被截断）：
 
 ```bash
 node skills/stock-tools/scripts/fetch_quote.js 600519
 node skills/stock-tools/scripts/fetch_quote.js 600519 000009 000001
 ```
 
-返回字段重点：
+如需 JSON（便于程序化处理）：
+
+```bash
+node skills/stock-tools/scripts/fetch_quote.js --json 600519
+```
+
+默认短输出格式（每行一只）：
+
+- `代码 名称｜最新价｜涨跌（涨跌幅）｜报价时间`
+- 非交易时段/无有效现价：`代码 名称｜非交易时段或无有效实时报价｜昨收：xx.xx 元｜报价时间`
+
+JSON 模式返回字段重点：
 
 - `code`
 - `name`
@@ -224,6 +235,8 @@ node skills/stock-tools/scripts/fetch_quote.js 600519 000009 000001
 - `quoteDate`
 - `quoteTime`
 - `detailUrl`
+- `valid`
+- `note`
 
 如果脚本报错：
 
